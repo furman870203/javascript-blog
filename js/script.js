@@ -6,6 +6,8 @@
   });*/
 
   const titleClickHandler = function(event){
+    const clickedElement = this;
+    
     console.log('Link was ckliced');
   /* remove class 'active' from all article links  */
 
@@ -16,6 +18,11 @@ for(let activeLink of activeLinks){
 }
 
   /* add class 'active' to the clicked link */
+  
+    const link = document.querySelector('.titles a');
+    link.classList.add('active');
+     
+  console.log('clickedElement:', clickedElement);
 
   /* remove class 'active' from all articles */
   
