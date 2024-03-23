@@ -38,6 +38,7 @@ body {
     text-transform: none;
     font-weight: 400;
     color: lighten($color-dark, 20%);
+    
   }
 }
 
@@ -88,6 +89,7 @@ body {
 .list-horizontal {
   li {
     display: inline-block;
+    margin: 10px;
   }
 }
 
