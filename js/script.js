@@ -154,7 +154,7 @@ function addClickListenersToTags(){
       tagsLink.addEventListener('click', tagClickHandler);
   /* END LOOP: for each link */
     }
-}
+} 
 
 addClickListenersToTags();
   
