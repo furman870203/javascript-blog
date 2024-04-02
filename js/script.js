@@ -189,6 +189,15 @@ function authorClickHandler(event){
   generateTitleLinks('[data-author="' + author + '"]');
 }
 
+function addClickListenersToAuthors(){
+  const authorLinks = document.querySelectorAll('a[href^="#author-"]');
+  for(let authorLink of authorLinks){
+    authorLink.addEventListener('click', authorClickHandler);
+  }
+}
+
+addClickListenersToAuthors();
+
 
 
 addClickListenersToTags();
