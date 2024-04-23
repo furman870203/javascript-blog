@@ -78,7 +78,13 @@ function generateTitleLinks(customSelector = ''){
 
 generateTitleLinks();
 
-function number(allTags){
+function calculateTagsParams(allTags){
+  const paramsMin  = Math.min(99999);
+  const paramsMax = Math.max(0);
+  for(let )
+
+  return params;
+
 
 }
 
