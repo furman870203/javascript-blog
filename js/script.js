@@ -45,7 +45,9 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  optTagsListSelector = '.tags.list';
+  optTagsListSelector = '.tags.list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
   
 function generateTitleLinks(customSelector = ''){
 
@@ -78,14 +80,26 @@ function generateTitleLinks(customSelector = ''){
 
 generateTitleLinks();
 
-function calculateTagsParams(allTags){
-  const paramsMin  = Math.min(99999);
-  const paramsMax = Math.max(0);
-  for(let )
+function calculateTagsParams(tags){
+  let paramsMin  = Math.min(99999);
+  let paramsMax = Math.max(0);
+  for(let tag in tags){
+    if(paramsMin > tags[tag]){
+      paramsMin = tags[tag];
+    }
+    if(paramsMax < tags[tag]){
+      paramsMax = tags[tag];
+    }
+  }
 
-  return params;
+  return {
+    max: paramsMax,
+    min: paramsMin
+  };
+}
 
-
+function calculateTagClass(count params){
+  
 }
 
 function generateTags(){
@@ -137,20 +151,22 @@ function generateTags(){
   const tagList = document.querySelector(optTagsListSelector);
 
   const tagsParams = calculateTagsParams(allTags);
-console.log('tagsParams:', tagsParams)
+  console.log('tagsParams:', tagsParams)
 
   /* [NEW] create variable for all links HTML code */
-let allTagsHTML = '';
+  let allTagsHTML = '';
 
-/* [NEW] START LOOP: for each tag in allTags: */
-for(let tag in allTags){
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
   /* [NEW] generate code of a link and add it to allTagsHTML */
-  allTagsHTML +='<a href="#' + tag + '">' + tag + '(' + allTags[tag] + ')</a> ';
-}
-/* [NEW] END LOOP: for each tag in allTags: */
+    allTagsHTML += tagLinkHTML;
+    const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParams) + '</li>';
+    console.log('tagLinkHTML:', tagLinkHTML);
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
 
-/*[NEW] add HTML from allTagsHTML to tagList */
-tagList.innerHTML = allTagsHTML;
+  /*[NEW] add HTML from allTagsHTML to tagList */
+  tagList.innerHTML = allTagsHTML;
 }  
 generateTags();
 
