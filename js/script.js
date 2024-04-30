@@ -165,7 +165,7 @@ function generateTags(){
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag in allTags){
   /* [NEW] generate code of a link and add it to allTagsHTML */
-    const tagLinkHTML = '<li class="' + calculateTagClass(allTags[tag], tagsParams) +'">' + tag + '</li>';
+    const tagLinkHTML = '<li class="' + calculateTagClass(allTags[tag], tagsParams) +'"><a href="#tag' + tag + '"><span>' + tag + '</span></a></li>';
     allTagsHTML += tagLinkHTML;
 
   }
@@ -221,6 +221,9 @@ function addClickListenersToTags(){
 }
 
 function generateAuthors(){
+ 
+  let allAuthors = {};
+
   const articles = document.querySelectorAll(optArticleSelector);
   
   
@@ -229,6 +232,13 @@ function generateAuthors(){
     const articleAuthor = article.getAttribute('data-author');
     const link = '<li><a href="#author' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
     
+    if(!allAuthors[articleAuthor]) {
+      allAuthors[articleAuthor] = 1;
+    } else {
+      allAuthors[articleAuthor]++;
+    }
+    
+
     wrapper.innerHTML = link;
   }
 
