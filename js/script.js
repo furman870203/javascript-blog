@@ -1,5 +1,11 @@
 'use strict';
 
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+};
+
 const titleClickHandler = function(event){
   event.preventDefault();
     
@@ -71,8 +77,9 @@ function generateTitleLinks(customSelector = ''){
     
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
+     
     /* insert link into titleList */
     titleList.innerHTML = titleList.innerHTML + linkHTML;
   }
@@ -131,7 +138,9 @@ function generateTags(){
     for(let tag of articleTagsArray){
   
       /* generate HTML of the link */
-      const tagHTML = '<li><a href="#tag' + tag + '"><span>' + tag + '</span></a></li>';
+      
+      const tagHTMLData = {id: tag, title: tag};
+      const tagHTML = templates.tagLink(tagHTMLData);
 
   
       /* add generated code to html variable */
@@ -230,8 +239,11 @@ function generateAuthors(){
   for(let article of articles){
     const wrapper = article.querySelector(optArticleAuthorSelector);
     const articleAuthor = article.getAttribute('data-author');
-    const link = '<li><a href="#author' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
     
+    const authorHTMLData = {id: articleAuthor, title: articleAuthor};
+    const authorHTML = templates.authorLink(authorHTMLData);
+
+
     if(!allAuthors[articleAuthor]) {
       allAuthors[articleAuthor] = 1;
     } else {
@@ -239,7 +251,7 @@ function generateAuthors(){
     }
     
 
-    wrapper.innerHTML = link;
+    wrapper.innerHTML = authorHTML;
   }
 
 }
