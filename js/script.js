@@ -1,5 +1,5 @@
 'use strict';
-
+/* global Handlebars */
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
@@ -176,7 +176,6 @@ function generateTags(){
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag in allTags){
   /* [NEW] generate code of a link and add it to allTagsHTML */
-    const tagLinkHTML = '<li class="' + calculateTagClass(allTags[tag], tagsParams) +'"><a href="#tag' + tag + '"><span>' + tag + '</span></a></li>';
     
     allTagsData.tags.push({
       tag: tag,
@@ -189,7 +188,7 @@ function generateTags(){
 
   /*[NEW] add HTML from allTagsHTML to tagList */
   tagList.innerHTML = templates.tagCloudLink(allTagsData);
-  console.log(allTagsData)
+  
 }  
 generateTags();
 
